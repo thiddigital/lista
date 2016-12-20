@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app='lista_mercado'>
+<head>
+<title>Lista de Supermercado</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="text/javascript" src="assets/js/lib/angular.min.js"></script>
+<script type="text/javascript" src="assets/js/lib/mask.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+<div id="lista_mercadoapp" ng-controller="ProdutoCtrl"> 
+  
+  <!-- COL CADASTRO -->
+  <section class="formulario">
+    <div class="col-2 form">
+      <div class="form-style">
+        <form autocomplete="off" role="form" name="cadastro" data-ng-submit="addProduto(lista_mercado)" method="POST" novalidate>
+          <fieldset>
+            <legend><span class="number">1</span> Cadastrar Produto</legend>
+            <input class="col-1" type="text" name="nome_produto" placeholder="Produto" ng-model="lista_mercado.nome_produto" required />
+            <input class="col-1" type="text" name="quantidade_produto" placeholder="Quantidade" ng-model="lista_mercado.quantidade_produto" required />
+            <br>
+          </fieldset>
+          <input class="col-1" type="submit" value="Cadastrar" ng-disabled="cadastro.$invalid">
+          <!-- ALERT VALIDAÇÃO --> 
+          <span class="" ng-show="cadastro.nome_produto.$touched && cadastro.nome_produto.$error.required">Obs. Preencha um Item acima.</span> 
+          <!-- // ALERT VALIDAÇÃO --> 
+          <span class="clearfix"></span>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- //COL CADASTRO --> 
+  
+  <!-- COL RESULTADO -->
+  <section class="listagem">
+    <div class="col-2">
+      <div class="form-style">
+        <fieldset>
+          <legend><span class="number">2</span> Lista de Produtos</legend>
+        </fieldset>
+        <div class="resultado">
+          <ul id="lista">
+            <li class="list-item"> <span class="col-3">Produto</span> <span class="col-3">Quantidade</span> <span class="col-3 delete" title="Apagar">Apagar</span> </li>
+          </ul>
+          <ul id="lista_mercado-list">
+            <li class="list-item" ng-repeat="lista_mercado in lista_mercado track by $index" ng-mouseenter="lista_mercado.show = true; item= 'focus'" ng-mouseleave="lista_mercado.show = false; item = 'nofocus'" ng-class='item'> <span class="col-1">
+              <hr>
+              </span> <span class="col-3"> {{lista_mercado.nome_produto}}</span> <span class="col-3"> {{lista_mercado.quantidade_produto}}</span> <span class="col-3 delete" title="Apagar" ng-click="deleteProduto(lista_mercado.indexOf(lista_mercado))"><img src="assets/svg/erro.svg"></span> </li>
+            <span class="clearfix"></span>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- //COL RESULTADO --> 
+  
+</div>
+<script type="text/javascript" src="assets/js/app.js"></script>
+</body>
+</html>
